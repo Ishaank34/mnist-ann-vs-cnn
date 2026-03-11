@@ -1,68 +1,161 @@
-# MNIST Classification using ANN and CNN
+# MNIST ANN vs CNN Digit Classifier
 
-## Overview
-This project implements classification of handwritten digits from the MNIST dataset using two different deep learning models:
-1. *Artificial Neural Network (ANN)* - A simple feedforward neural network.
-2. *Convolutional Neural Network (CNN)* - A deep learning model designed for image classification.
+This project compares the performance of two neural network architectures — **Artificial Neural Network (ANN)** and **Convolutional Neural Network (CNN)** — for handwritten digit recognition using the **MNIST dataset**.
+
+The implementation is built using **TensorFlow** and **Keras** and demonstrates how CNNs outperform traditional fully connected neural networks on image classification tasks.
+
+---
+
+## Project Overview
+
+The MNIST dataset contains **70,000 grayscale images** of handwritten digits (0–9).
+
+Each image:
+
+* Size: **28 × 28 pixels**
+* Grayscale image
+* Label: digit from **0–9**
+
+The project trains two models:
+
+1. **ANN (Fully Connected Neural Network)**
+2. **CNN (Convolutional Neural Network)**
+
+Their performance is then compared using test accuracy.
+
+---
+
+## Technologies Used
+
+* Python
+* TensorFlow
+* Keras
+* NumPy
+* Matplotlib
+
+---
 
 ## Dataset
-The MNIST dataset consists of 60,000 training images and 10,000 test images of handwritten digits (0-9), each of size 28x28 pixels.
 
-## Prerequisites
-Ensure you have the following installed:
-- Python 3.x
-- TensorFlow
-- NumPy
-- Matplotlib
+Dataset used: **MNIST Handwritten Digit Dataset**
 
-You can install the required libraries using:
-sh
-pip install tensorflow numpy matplotlib
+It is automatically loaded using TensorFlow:
 
+```python
+from tensorflow.keras.datasets import mnist
+```
 
-## Code Explanation
+Dataset split:
 
-### 1. Load and Preprocess the Data
-- The dataset is loaded using keras.datasets.mnist.load_data().
-- The pixel values are normalized to the range [0,1] by dividing by 255.
+* **Training images:** 60,000
+* **Testing images:** 10,000
 
-### 2. Build and Train ANN Model
-- A sequential model with:
-  - Flatten layer to convert 2D images into a 1D array.
-  - A dense hidden layer with 100 neurons and ReLU activation.
-  - A dense output layer with 10 neurons and softmax activation for classification.
-- Compiled with Adam optimizer and sparse categorical cross-entropy loss.
-- Trained for 10 epochs.
+---
 
-### 3. Build and Train CNN Model
-- A sequential model with:
-  - A Conv2D layer with 32 filters and a 3x3 kernel, using ReLU activation.
-  - A MaxPooling2D layer to downsample the feature maps.
-  - A Flatten layer to convert 2D features into 1D.
-  - A dense hidden layer with 100 neurons and ReLU activation.
-  - A dense output layer with 10 neurons and softmax activation.
-- Compiled with Adam optimizer and sparse categorical cross-entropy loss.
-- Trained for 5 epochs.
+## Model Architectures
 
-### 4. Evaluate Models
-Both models are evaluated on the test dataset using model.evaluate().
+### Artificial Neural Network (ANN)
+
+Architecture:
+
+Input Layer (Flatten 28×28)
+↓
+Dense Layer (100 neurons, ReLU)
+↓
+Output Layer (10 neurons, Softmax)
+
+---
+
+### Convolutional Neural Network (CNN)
+
+Architecture:
+
+Conv2D (32 filters, 3×3 kernel)
+↓
+MaxPooling (2×2)
+↓
+Flatten
+↓
+Dense Layer (100 neurons, ReLU)
+↓
+Output Layer (10 neurons, Softmax)
+
+---
+
+## Training
+
+ANN Model:
+
+* Optimizer: Adam
+* Loss: Sparse Categorical Crossentropy
+* Epochs: 10
+
+CNN Model:
+
+* Optimizer: Adam
+* Loss: Sparse Categorical Crossentropy
+* Epochs: 5
+
+---
 
 ## Results
-The CNN model generally achieves higher accuracy than the ANN model due to its ability to extract spatial features.
 
-## Running the Code
-Run the script using:
-sh
-python mnist_classification.py
+The CNN model typically achieves **higher accuracy** because convolutional layers are better at capturing spatial patterns in images.
 
+Typical results:
+
+ANN Accuracy: ~97%
+CNN Accuracy: ~99%
+
+---
+
+## How to Run the Project
+
+### 1 Install dependencies
+
+```bash
+pip install tensorflow matplotlib numpy
+```
+
+### 2 Run the script
+
+```bash
+python mnist_model.py
+```
+
+The script will:
+
+* load the dataset
+* train ANN
+* train CNN
+* evaluate both models
+* display sample images
+
+---
+
+## Example Output
+
+Example digit image from MNIST:
+
+28×28 grayscale handwritten digit displayed using Matplotlib.
+
+---
 
 ## Future Improvements
-- Increase the number of filters in CNN.
-- Add dropout layers to prevent overfitting.
-- Experiment with different architectures (e.g., deeper networks, batch normalization).
+
+Possible enhancements:
+
+* Add confusion matrix visualization
+* Plot training accuracy and loss curves
+* Implement deeper CNN architecture
+* Add model saving and loading
+* Add prediction visualization for test images
+
+---
 
 ## Author
-Developed as part of a deep learning experiment for handwritten digit classification.
 
-## License
-This project is open-source and available for public use.
+**Ishaan Kapoor**
+
+Computer Science Engineering Student
+VIT Vellore
